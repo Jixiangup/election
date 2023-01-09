@@ -2,7 +2,48 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.bnyte.election.api.mapper.UserMapper">
 
+    <!-- 表名称 -->
+    <sql id="table_name">
+        t_user
+    </sql>
+
+    <!-- 数据库所有字段 -->
+    <sql id="all_field" >
+        id,
+        email,
+        id_card,
+        admin,
+        create_time,
+        modified_time,
+        deleted
+    </sql>
+    <insert id="insert" keyProperty="id" useGeneratedKeys="true">
+        insert into
+        <include refid="table_name" />    ( <include refid="all_field" /> )
+        values (
+            null,
+            #{item.email},
+            #{item.idCard},
+            #{item.admin},
+            #{item.createTime},
+            #{item.modifiedTime},
+            #{item.deleted}
+        )
+    </insert>
+
+    <update id="updateById">
+        update <include refid="table_name" />
+        set
+        email = #{item.email},
+        id_card = #{item.idCard},
+        admin = #{item.admin},
+        create_time = #{item.createTime},
+        modified_time = #{item.modifiedTime},
+        deleted = #{item.deleted}
+        where id = #{item.id}
+    </update>
+
     <select id="queryWhetherTheUserExists" resultType="com.bnyte.election.api.entity.User">
-        select * from t_user where email = #{email} or id_card = #{idCard}
+        select <include refid="all_field" /> from <include refid="table_name" /> where (email = #{email} or id_card = #{idCard}) and deleted = false
     </select>
 </mapper>

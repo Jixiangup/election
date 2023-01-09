@@ -18,8 +18,25 @@ public enum Status {
      */
     SUCCESSFUL(0, "successful"),
 
+    /**
+     * 请求失败
+     */
     ERROR(-1, "error"),
 
+    /*
+    400000 - 499999 客户端相关异常
+ */
+    PAYLOAD_ASSERT_ERROR(40000, "{message}"),
+
+    /**
+     * 邮件或身份证已经存在异常
+     */
+    EMAIL_OR_ID_CARD_EXISTS(40001, "邮箱或身份证已经存在"),
+
+    /**
+     * 系统异常
+     */
+    SYSTEM_ERROR(50000, "系统异常"),
 
     ;
 

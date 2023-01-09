@@ -13,18 +13,28 @@ import jakarta.validation.constraints.Pattern;
 public class RegisterParam {
 
     /**
+     * 主键id
+     */
+    private Long id;
+
+    /**
      * 邮箱
      */
     @NotBlank(message = "邮箱地址不能为空")
-    @Pattern(regexp = "^\\\\s*\\\\w+(?:\\\\.?[\\\\w-]+)*@[a-zA-Z0-9]+(?:[-.][a-zA-Z0-9]+)*\\\\.[a-zA-Z]+\\\\s*$", message = "邮箱地址不合法")
+    @Pattern(regexp = "^\\w+([-+.]\\w+)*@\\w+([-.]\\w+)*\\.\\w+([-.]\\w+)*$", message = "邮箱地址不合法")
     private String email;
 
     /**
      * 香港身份证
      */
     @NotBlank(message = "身份证不能为空")
-    @Pattern(regexp = "^[A-Z]?[A-Z]\\\\d{6}\\\\([0-9A]{1}\\\\)$", message = "身份证不合法")
+    @Pattern(regexp = "^[A-Z]?[A-Z]\\d{6}\\([0-9A]\\)$", message = "身份证不合法")
     private String idCard;
+
+    /**
+     * 是否为管理员
+     */
+    private Boolean admin;
 
     public String getEmail() {
         return email;
@@ -40,5 +50,21 @@ public class RegisterParam {
 
     public void setIdCard(String idCard) {
         this.idCard = idCard;
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public Boolean getAdmin() {
+        return admin;
+    }
+
+    public void setAdmin(Boolean admin) {
+        this.admin = admin;
     }
 }

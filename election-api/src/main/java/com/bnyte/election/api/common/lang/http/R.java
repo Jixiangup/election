@@ -108,6 +108,7 @@ public class R<T> {
         r.success = false;
         r.type = ENotificationType.NONE.getType();
         r.target = ENotificationType.NONE.getTarget();
+        r.message = status.getMessage();
         return r;
     }
 
@@ -117,6 +118,16 @@ public class R<T> {
         r.success = false;
         r.type = notification.getType();
         r.target = notification.getTarget();
+        return r;
+    }
+
+    public static R<Void> ERROR(Status status, String message) {
+        R<Void> r = new R<>();
+        r.code = status.getCode();
+        r.success = false;
+        r.type = ENotificationType.NONE.getType();
+        r.target = ENotificationType.NONE.getTarget();
+        r.message = message;
         return r;
     }
 

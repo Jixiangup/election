@@ -6,9 +6,13 @@ package com.bnyte.election.api.dto.user;
  */
 public class RegisterDTO {
 
+    private Long id;
+
     private String email;
 
     private String idCard;
+
+    private Boolean admin;
 
     public String getEmail() {
         return email;
@@ -24,5 +28,21 @@ public class RegisterDTO {
 
     public void setIdCard(String idCard) {
         this.idCard = idCard;
+    }
+
+    public Boolean getAdmin() {
+        return admin;
+    }
+
+    public void setAdmin(Boolean admin) {
+        this.admin = admin;
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
     }
 }

@@ -4,3 +4,9 @@ spring:
     driver-class-name: com.mysql.cj.jdbc.Driver
     username: ${MYSQL_USERNAME:root}
     password: ${MYSQL_PASSWORD:123456}
+mybatis:
+  configuration:
+    map-underscore-to-camel-case: true
+server:
+  servlet:
+    context-path: /api

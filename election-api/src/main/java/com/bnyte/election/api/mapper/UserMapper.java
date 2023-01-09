@@ -12,4 +12,8 @@ import org.apache.ibatis.annotations.Param;
  */
 public interface UserMapper {
     User queryWhetherTheUserExists(@Param("email") String email, @Param("idCard") String idCard);
+
+    Long insert(@Param("item") User user);
+
+    Long updateById(@Param("item") User user);
 }
