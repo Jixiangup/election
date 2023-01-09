@@ -21,23 +21,26 @@ public enum Status {
     /**
      * 请求失败
      */
+
     ERROR(-1, "error"),
 
+    NO_OPERATION_PERMISSION(10000, "没有操作权限"),
+
     /*
-    400000 - 499999 客户端相关异常
- */
+     * 400000 - 499999 客户端相关异常
+     */
     PAYLOAD_ASSERT_ERROR(40000, "{message}"),
 
     /**
      * 邮件或身份证已经存在异常
      */
     EMAIL_OR_ID_CARD_EXISTS(40001, "邮箱或身份证已经存在"),
+    CANDIDATE_NICKNAME_EXISTS(40002, "候选人昵称已经存在"),
 
     /**
      * 系统异常
      */
     SYSTEM_ERROR(50000, "系统异常"),
-
     ;
 
     public static Status code(Integer code) {

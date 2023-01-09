@@ -28,7 +28,7 @@ public class UserController {
 
     @PostMapping("/register")
     public R<RegisterVO> register(@RequestBody @Validated RegisterParam payload) {
-        return R.OK(UserTransfer.INSTANCE.toVO(userService.register(UserTransfer.INSTANCE.toDTO(payload))));
+        return R.OK(UserTransfer.INSTANCE.entity2VO(userService.register(UserTransfer.INSTANCE.param2DTO(payload))));
     }
 
 

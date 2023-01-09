@@ -19,8 +19,8 @@ public interface UserTransfer {
 
     UserTransfer INSTANCE = Mappers.getMapper(UserTransfer.class);
 
-    RegisterDTO toDTO(RegisterParam param);
+    RegisterDTO param2DTO(RegisterParam param);
 
 
-    RegisterVO toVO(User user);
+    RegisterVO entity2VO(User user);
 }

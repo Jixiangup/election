@@ -146,6 +146,11 @@ public class R<T> {
         return this;
     }
 
+    public R<T> code(Integer code) {
+        this.code = code;
+        return this;
+    }
+
     public R<T> notification(ENotificationType notificationType) {
         this.type = notificationType.getType();
         this.target = notificationType.getTarget();

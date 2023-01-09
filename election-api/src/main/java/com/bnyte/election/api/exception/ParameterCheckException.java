@@ -9,9 +9,9 @@ import com.bnyte.election.api.common.lang.http.Status;
  * @author bnyte
  * @since 1.0.0
  */
-public class CheckException extends GlobalException {
+public class ParameterCheckException extends GlobalException {
 
-    public CheckException(Status status) {
+    public ParameterCheckException(Status status) {
         super(status);
     }
 

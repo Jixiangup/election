@@ -33,7 +33,7 @@ public interface IUserService {
      * 通过主键ID保存或者更新用户信息
      *  id < 0 或为空则新增, 否则通过id更新
      * @param user 用户信息
-     * @return 主键id
+     * @return 影响行数
      */
     Long saveOrUpdateById(User user);
 

@@ -4,11 +4,11 @@ import com.bnyte.election.api.common.constant.WebConstant;
 import com.bnyte.election.api.common.lang.http.ENotificationType;
 import com.bnyte.election.api.common.lang.http.R;
 import com.bnyte.election.api.common.lang.http.Status;
-import com.bnyte.election.api.exception.CheckException;
+import com.bnyte.election.api.exception.AuthException;
+import com.bnyte.election.api.exception.ParameterCheckException;
+import com.bnyte.election.api.exception.GlobalException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.MessageSource;
 import org.springframework.core.MethodParameter;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -39,17 +39,62 @@ public class HttpResponseAdvice implements ResponseBodyAdvice<Object> {
 
     private static final Logger log = LoggerFactory.getLogger(HttpResponseAdvice.class);
 
-    @Autowired
-    MessageSource messageSource;
-
-    @ExceptionHandler(CheckException.class)
+    /**
+     * 处理参数校验异常
+     * @param e 参数校验异常
+     * @return http响应结果集
+     */
+    @ExceptionHandler(ParameterCheckException.class)
     @ResponseStatus(HttpStatus.BAD_REQUEST)
-    public R<Void> handlerAuthenticationException(CheckException e) {
+    public R<Void> handlerCheckException(ParameterCheckException e) {
         if (log.isErrorEnabled()) {
             log.error(e.getStatus().getMessage(), e);
         }
         return R.ERROR(e.getStatus());
     }
+
+    /**
+     * 处理鉴权
+     * @param e 参数校验异常对象
+     * @return http响应结果集
+     */
+    @ExceptionHandler(AuthException.class)
+    @ResponseStatus(HttpStatus.UNAUTHORIZED)
+    public R<Void> handlerAuthException(AuthException e) {
+        if (log.isErrorEnabled()) {
+            log.error(e.getStatus().getMessage(), e);
+        }
+        return R.ERROR(e.getStatus());
+    }
+
+    /**
+     * 处理参数校验异常
+     * @param e 参数校验异常
+     * @return http响应结果集
+     */
+    @ExceptionHandler(GlobalException.class)
+    @ResponseStatus(HttpStatus.SERVICE_UNAVAILABLE)
+    public R<Void> handlerGlobalException(GlobalException e) {
+        if (log.isErrorEnabled()) {
+            log.error(e.getStatus().getMessage(), e);
+        }
+        return R.ERROR(e.getStatus());
+    }
+
+    /**
+     * 处理未捕获异常
+     * @param e 参数校验异常
+     * @return http响应结果集
+     */
+    @ExceptionHandler(Throwable.class)
+    @ResponseStatus(HttpStatus.SERVICE_UNAVAILABLE)
+    public R<Void> handlerThrowable(Throwable e) {
+        if (log.isErrorEnabled()) {
+            log.error(e.getMessage(), e);
+        }
+        return R.ERROR().code(Status.ERROR.getCode()).message(Status.ERROR.getMessage());
+    }
+
 
     /**
      * 参数检验异常处理
