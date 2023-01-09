@@ -1,6 +1,7 @@
 package com.bnyte.election.api.http.advice;
 
 import com.bnyte.election.api.common.constant.WebConstant;
+import com.bnyte.election.api.common.lang.http.ENotificationType;
 import com.bnyte.election.api.common.lang.http.R;
 import com.bnyte.election.api.common.lang.http.Status;
 import com.bnyte.election.api.exception.CheckException;
@@ -65,7 +66,7 @@ public class HttpResponseAdvice implements ResponseBodyAdvice<Object> {
         List<FieldError> fieldErrors = bindingResult.getFieldErrors();
         StringJoiner message = new StringJoiner(",");
         fieldErrors.forEach(error -> message.add(error.getDefaultMessage()));
-        return R.ERROR(Status.PAYLOAD_ASSERT_ERROR, message.toString());
+        return R.ERROR(Status.PAYLOAD_ASSERT_ERROR).message(message.toString()).notification(ENotificationType.ERROR_MESSAGE);
     }
 
     @Override
@@ -81,6 +82,7 @@ public class HttpResponseAdvice implements ResponseBodyAdvice<Object> {
         if (body instanceof R<?> r) {
             r.setRequestId(requestId);
             r.setTimestamp(Long.parseLong(requestTimestamp));
+            r.setMessage(Status.code(r.getCode()).getMessage());
             return r;
         }
         return body;

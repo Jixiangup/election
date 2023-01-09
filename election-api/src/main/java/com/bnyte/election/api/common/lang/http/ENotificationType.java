@@ -16,6 +16,12 @@ public enum ENotificationType {
 
     // 成功通知
     SUCCESS_NOTIFICATION(2, null),
+
+    // 成功消息弹窗
+    ERROR_MESSAGE(3, null),
+
+    // 成功通知
+    ERROR_NOTIFICATION(4, null),
     ;
 
     private Integer type;

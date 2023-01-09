@@ -34,7 +34,7 @@ public class RegisterParam {
     /**
      * 是否为管理员
      */
-    private Boolean admin;
+    private Boolean admin = false;
 
     public String getEmail() {
         return email;

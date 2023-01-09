@@ -11,6 +11,7 @@ import com.bnyte.election.api.util.ObjectUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.io.Serializable;
 import java.util.Date;
 
 /**
@@ -29,21 +30,28 @@ public class IUserServiceImpl implements IUserService {
     @Override
     public User register(RegisterDTO dto) {
 
-        User user = queryWithEmailOrIdCard(dto.getEmail(), dto.getIdCard());
+        User user = null;
 
         // 校验重复用户登记
-        if (ObjectUtils.nonNull(user)) {
-            throw new CheckException(Status.EMAIL_OR_ID_CARD_EXISTS);
+        if (null == dto.getId() || dto.getId() < 1) {
+            user = queryWithEmailOrIdCard(dto.getEmail(), dto.getIdCard());
+            if (ObjectUtils.nonNull(user)) {
+                throw new CheckException(Status.EMAIL_OR_ID_CARD_EXISTS);
+            }
+            // 组装登记用户信息
+            user = buildRegisterUser(dto);
+        } else {
+            user = queryById(dto.getId());
+            user.setModifiedTime(new Date());
+            user.setAdmin(dto.getAdmin());
+            user.setEmail(dto.getEmail());
+            user.setIdCard(dto.getIdCard());
         }
 
-        // 组装登记用户信息
-        user = buildRegisterUser(dto);
-
         // 保存用户信息
+        saveOrUpdateById(user);
 
-
-
-        return null;
+        return user;
     }
 
     /**
@@ -79,5 +87,10 @@ public class IUserServiceImpl implements IUserService {
             userMapper.updateById(user);
         }
         return user.getId();
+    }
+
+    @Override
+    public User queryById(Serializable id) {
+        return userMapper.selectById(id);
     }
 }

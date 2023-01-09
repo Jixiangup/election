@@ -3,6 +3,8 @@ package com.bnyte.election.api.service;
 import com.bnyte.election.api.dto.user.RegisterDTO;
 import com.bnyte.election.api.entity.User;
 
+import java.io.Serializable;
+
 /**
  * <p>
  *     用户业务服务抽象
@@ -34,4 +36,11 @@ public interface IUserService {
      * @return 主键id
      */
     Long saveOrUpdateById(User user);
+
+    /**
+     * 通过主键查询用户
+     * @param id 主键id
+     * @return 用户信息
+     */
+    User queryById(Serializable id);
 }

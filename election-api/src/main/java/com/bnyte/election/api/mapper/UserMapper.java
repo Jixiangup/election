@@ -3,6 +3,8 @@ package com.bnyte.election.api.mapper;
 import com.bnyte.election.api.entity.User;
 import org.apache.ibatis.annotations.Param;
 
+import java.io.Serializable;
+
 /**
  * <p>
  *     用户ORM
@@ -16,4 +18,6 @@ public interface UserMapper {
     Long insert(@Param("item") User user);
 
     Long updateById(@Param("item") User user);
+
+    User selectById(@Param("id") Serializable id);
 }

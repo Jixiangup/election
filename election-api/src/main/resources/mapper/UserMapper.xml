@@ -46,4 +46,8 @@
     <select id="queryWhetherTheUserExists" resultType="com.bnyte.election.api.entity.User">
         select <include refid="all_field" /> from <include refid="table_name" /> where (email = #{email} or id_card = #{idCard}) and deleted = false
     </select>
+
+    <select id="selectById" resultType="com.bnyte.election.api.entity.User">
+        select <include refid="all_field" /> from <include refid="table_name" /> where id = #{id}
+    </select>
 </mapper>

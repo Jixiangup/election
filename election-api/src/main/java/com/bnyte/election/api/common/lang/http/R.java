@@ -121,16 +121,6 @@ public class R<T> {
         return r;
     }
 
-    public static R<Void> ERROR(Status status, String message) {
-        R<Void> r = new R<>();
-        r.code = status.getCode();
-        r.success = false;
-        r.type = ENotificationType.NONE.getType();
-        r.target = ENotificationType.NONE.getTarget();
-        r.message = message;
-        return r;
-    }
-
     public static <T> R<T> OK(T data) {
         R<T> r = new R<>();
         r.code = Status.SUCCESSFUL.getCode();
@@ -153,6 +143,12 @@ public class R<T> {
 
     public R<T> message(String message) {
         this.message = message;
+        return this;
+    }
+
+    public R<T> notification(ENotificationType notificationType) {
+        this.type = notificationType.getType();
+        this.target = notificationType.getTarget();
         return this;
     }
 
