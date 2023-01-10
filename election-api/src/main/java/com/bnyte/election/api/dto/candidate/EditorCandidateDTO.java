@@ -7,11 +7,6 @@ package com.bnyte.election.api.dto.candidate;
 public class EditorCandidateDTO {
 
     /**
-     * 操作的用户id
-     */
-    private Long userid;
-
-    /**
      * 新的候选人昵称
      */
     private String nickname;
@@ -20,14 +15,6 @@ public class EditorCandidateDTO {
      * 候选人id
      */
     private Long id;
-
-    public Long getUserid() {
-        return userid;
-    }
-
-    public void setUserid(Long userid) {
-        this.userid = userid;
-    }
 
     public String getNickname() {
         return nickname;

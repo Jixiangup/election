@@ -1,5 +1,8 @@
 package com.bnyte.election.api.param.candidate;
 
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
+
 /**
  * <p>
  *     编辑候选人请求参数
@@ -10,27 +13,15 @@ package com.bnyte.election.api.param.candidate;
 public class EditorCandidateParam {
 
     /**
-     * 操作的用户id
-     */
-    private Long userid;
-
-    /**
      * 新的候选人昵称
      */
+    @NotBlank(message = "候选人昵称不能为空")
     private String nickname;
 
     /**
      * 候选人id
      */
     private Long id;
-
-    public Long getUserid() {
-        return userid;
-    }
-
-    public void setUserid(Long userid) {
-        this.userid = userid;
-    }
 
     public String getNickname() {
         return nickname;

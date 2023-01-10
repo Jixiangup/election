@@ -14,7 +14,7 @@
 
 > 后端服务
 
-## 技术展
+## 技术栈
 
 - Java 17.0
 - [Maven 3.8.6](https://maven.apache.org/download.cgi)

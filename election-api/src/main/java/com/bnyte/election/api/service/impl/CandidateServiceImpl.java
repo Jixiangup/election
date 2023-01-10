@@ -3,12 +3,9 @@ package com.bnyte.election.api.service.impl;
 import com.bnyte.election.api.common.lang.http.Status;
 import com.bnyte.election.api.dto.candidate.EditorCandidateDTO;
 import com.bnyte.election.api.entity.Candidate;
-import com.bnyte.election.api.entity.User;
-import com.bnyte.election.api.exception.AuthException;
 import com.bnyte.election.api.exception.ParameterCheckException;
 import com.bnyte.election.api.mapper.CandidateMapper;
 import com.bnyte.election.api.service.ICandidateService;
-import com.bnyte.election.api.service.IUserService;
 import com.bnyte.election.api.util.ObjectUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -28,18 +25,9 @@ public class CandidateServiceImpl implements ICandidateService {
     @Autowired
     private CandidateMapper candidateMapper;
 
-    @Autowired
-    private IUserService userService;
-
     @Override
     @Transactional
     public Long editor(EditorCandidateDTO dto) {
-
-        // 校验操作用户是否有权限
-        User user = userService.queryById(dto.getUserid());
-        if (ObjectUtils.isNull(user) || !user.getAdmin()) {
-            throw new AuthException();
-        }
 
         Candidate candidate;
 

@@ -1,5 +1,6 @@
 package com.bnyte.election.api.param.user;
 
+import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Pattern;
 
@@ -20,8 +21,8 @@ public class RegisterParam {
     /**
      * 邮箱
      */
+    @Email
     @NotBlank(message = "邮箱地址不能为空")
-    @Pattern(regexp = "^\\w+([-+.]\\w+)*@\\w+([-.]\\w+)*\\.\\w+([-.]\\w+)*$", message = "邮箱地址不合法")
     private String email;
 
     /**

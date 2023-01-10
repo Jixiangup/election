@@ -69,6 +69,12 @@
                 <version>${mapstruct.version}</version>
             </dependency>
 
+            <dependency>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-starter-aop</artifactId>
+                <version>${spring-component.version}</version>
+            </dependency>
+
         </dependencies>
     </dependencyManagement>
 
