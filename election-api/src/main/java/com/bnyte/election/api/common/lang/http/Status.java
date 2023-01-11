@@ -36,6 +36,10 @@ public enum Status {
      */
     EMAIL_OR_ID_CARD_EXISTS(40001, "邮箱或身份证已经存在"),
     CANDIDATE_NICKNAME_EXISTS(40002, "候选人昵称已经存在"),
+    CURRENT_STATE_IS_NOT_OPERATIONAL(40003, "不合法的状态操作"),
+    DATA_NOT_FOUND(40004, "数据不存在"),
+    DUPLICATE_VOTE(40005, "重复投票"),
+    UNSUPPORTED_DISTRIBUTED_LOCK_TYPE(40006, "不支持的分布式锁类型"),
 
     /**
      * 系统异常

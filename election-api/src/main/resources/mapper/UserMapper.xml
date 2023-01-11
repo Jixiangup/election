@@ -48,6 +48,6 @@
     </select>
 
     <select id="selectById" resultType="com.bnyte.election.api.entity.User">
-        select <include refid="all_field" /> from <include refid="table_name" /> where id = #{id}
+        select <include refid="all_field" /> from <include refid="table_name" /> where id = #{id} and deleted = false
     </select>
 </mapper>

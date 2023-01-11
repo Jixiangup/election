@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.bnyte.election.api.mapper.ElectionCandidateMapper">
+
+    <!-- 表名称 -->
+    <sql id="table_name">
+        t_election_candidate
+    </sql>
+
+    <!-- 数据库所有字段 -->
+    <sql id="all_field" >
+        id,
+        candidate_id,
+        election_id,
+        `count`,
+        create_time,
+        modified_time,
+        deleted
+    </sql>
+
+    <insert id="insertBatch">
+        insert into <include refid="table_name" /> (<include refid="all_field" />) values
+            <foreach collection="list" item="item" separator=",">
+                (null, #{item.candidateId}, #{item.electionId}, #{item.count}, #{item.createTime}, #{item.modifiedTime}, #{item.deleted})
+            </foreach>
+    </insert>
+
+    <update id="deleteOldCandidateOfElection">
+        update <include refid="table_name" />
+        set deleted = true
+        where election_id = #{electionId};
+    </update>
+    <update id="updateById">
+        update <include refid="table_name" />
+        set
+        candidate_id = #{item.candidateId},
+        election_id = #{item.electionId},
+        `count` = #{item.count},
+        create_time = #{item.createTime},
+        modified_time = #{item.modifiedTime},
+        deleted = #{item.deleted}
+        where id = #{item.id};
+    </update>
+    <select id="selectListByElectionId" resultType="com.bnyte.election.api.entity.ElectionCandidate">
+        select <include refid="all_field" /> from <include refid="table_name" /> where election_id = #{electionId} and deleted = false
+    </select>
+    <select id="selectElectionByCandidateId" resultType="com.bnyte.election.api.entity.ElectionCandidate">
+        select <include refid="all_field" /> from <include refid="table_name" /> where election_id = #{electionId} and candidate_id = #{candidateId} and deleted = false
+    </select>
+</mapper>

@@ -6,7 +6,7 @@ import com.bnyte.election.api.entity.Candidate;
 import com.bnyte.election.api.exception.ParameterCheckException;
 import com.bnyte.election.api.mapper.CandidateMapper;
 import com.bnyte.election.api.service.ICandidateService;
-import com.bnyte.election.api.util.ObjectUtils;
+import com.bnyte.election.api.common.util.ObjectUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;

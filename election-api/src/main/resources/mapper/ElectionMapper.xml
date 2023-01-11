@@ -4,13 +4,13 @@
 
     <!-- 表名称 -->
     <sql id="table_name">
-        t_candidate
+        t_election
     </sql>
 
     <!-- 数据库所有字段 -->
     <sql id="all_field" >
         id,
-        nickname,
+        status,
         create_time,
         modified_time,
         deleted
@@ -20,7 +20,7 @@
         <include refid="table_name" />    ( <include refid="all_field" /> )
         values (
             null,
-            #{item.nickname},
+            #{item.status},
             #{item.createTime},
             #{item.modifiedTime},
             #{item.deleted}
@@ -30,18 +30,16 @@
     <update id="updateById">
         update <include refid="table_name" />
         set
-        nickname = #{item.nickname},
+        status = #{item.status},
         create_time = #{item.createTime},
         modified_time = #{item.modifiedTime},
         deleted = #{item.deleted}
-        where id = #{item.id}
+        where id = #{item.id} and deleted = false
     </update>
 
-    <select id="selectById" resultType="com.bnyte.election.api.entity.Candidate">
-        select <include refid="all_field" /> from <include refid="table_name" /> where id = #{id}
+    <select id="selectById" resultType="com.bnyte.election.api.entity.Election">
+        select <include refid="all_field" /> from <include refid="table_name" /> where id = #{id} and deleted = false
     </select>
 
-    <select id="selectWithNickname" resultType="com.bnyte.election.api.entity.Candidate">
-        select <include refid="all_field" /> from <include refid="table_name" /> where nickname = #{nickname}
-    </select>
+
 </mapper>

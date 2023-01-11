@@ -9,6 +9,17 @@ package com.bnyte.election.api.entity;
  */
 public class Election extends AbsAutoIdEntity {
 
-    private Byte status;
+    /**
+     * 当前选举状态
+     * @see com.bnyte.election.api.common.enums.EElectionStatus
+     */
+    private Integer status;
 
+    public Integer getStatus() {
+        return status;
+    }
+
+    public void setStatus(Integer status) {
+        this.status = status;
+    }
 }

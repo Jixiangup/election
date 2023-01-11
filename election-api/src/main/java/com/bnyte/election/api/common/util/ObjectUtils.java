@@ -1,4 +1,4 @@
-package com.bnyte.election.api.util;
+package com.bnyte.election.api.common.util;
 
 import java.util.Objects;
 

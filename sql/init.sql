@@ -45,5 +45,15 @@ create table t_election_candidate (
                                       deleted tinyint(1) default false comment '数据逻辑删除状态, 1/true: 已删除 0/false: 未删除 默认0/未删除'
 ) comment '平台选举和候选人映射表 选举多对一候选人';
 
+drop table if exists t_election_candidate_detail;
+create table t_election_candidate_detail (
+                                             id bigint primary key auto_increment comment '自增主键',
+                                             candidate_id bigint comment '候选人id',
+                                             election_id bigint comment '选举号id',
+                                             userid bigint comment '投票用户id',
+                                             create_time datetime comment '数据创建时间',
+                                             modified_time datetime comment '数据最后一次更新时间',
+                                             deleted tinyint(1) default false comment '数据逻辑删除状态, 1/true: 已删除 0/false: 未删除 默认0/未删除'
+) comment '平台选举和候选人投票详情';
 
 

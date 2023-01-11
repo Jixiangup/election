@@ -1,11 +1,11 @@
 package com.bnyte.election.api.aspectj;
 
 import com.bnyte.election.api.common.constant.WebConstant;
+import com.bnyte.election.api.common.util.ObjectUtils;
+import com.bnyte.election.api.common.util.StringUtils;
 import com.bnyte.election.api.entity.User;
 import com.bnyte.election.api.exception.AuthException;
 import com.bnyte.election.api.service.IUserService;
-import com.bnyte.election.api.util.ObjectUtils;
-import com.bnyte.election.api.util.StringUtils;
 import jakarta.servlet.http.HttpServletRequest;
 import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.annotation.Before;
@@ -32,7 +32,7 @@ public class OperatingAuthorityAspectj {
     /**
      * 切入点
      */
-    @Pointcut("@annotation(com.bnyte.election.api.common.annotation.aop.OperatingAuthority)")
+    @Pointcut("@annotation(com.bnyte.election.api.annotation.aop.OperatingAuthority)")
     public void pointcut(){}
 
     @Before("pointcut()")

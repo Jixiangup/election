@@ -1,6 +1,6 @@
 package com.bnyte.election.api.controller;
 
-import com.bnyte.election.api.common.annotation.aop.OperatingAuthority;
+import com.bnyte.election.api.annotation.aop.OperatingAuthority;
 import com.bnyte.election.api.common.lang.http.R;
 import com.bnyte.election.api.mapstruct.candidate.CandidateTransfer;
 import com.bnyte.election.api.param.candidate.EditorCandidateParam;

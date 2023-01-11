@@ -1,7 +1,7 @@
 package com.bnyte.election.api.http.interceptor;
 
 import com.bnyte.election.api.common.constant.WebConstant;
-import com.bnyte.election.api.util.RequestUtils;
+import com.bnyte.election.api.common.util.RequestUtils;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import org.slf4j.Logger;

@@ -7,7 +7,7 @@ import com.bnyte.election.api.exception.ParameterCheckException;
 import com.bnyte.election.api.exception.GlobalException;
 import com.bnyte.election.api.mapper.UserMapper;
 import com.bnyte.election.api.service.IUserService;
-import com.bnyte.election.api.util.ObjectUtils;
+import com.bnyte.election.api.common.util.ObjectUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
