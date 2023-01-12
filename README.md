@@ -88,7 +88,7 @@
 |  message  | string  |                             响应描述                              | Required |
 |  success  | boolean |                  本次是否成功, 前端校验用, 也可以使用code判断                   | Required |
 |   type    | number  |         请求完成之后的[通知类型](docs/api/api_constant.md#通知类型)          | Required |
-|  target   | string  | 请求完成之后的跳转值, 见[通知类型](docs/api/api_constant.md#通知类型)的`target`描述 | Required |
+|  target   | string  | 请求完成之后的跳转值, 见[通知类型](docs/api/api_constant.md#通知类型)的`target`描述 | Optional |
 | requestId | string  |                    本次请求id, 用于快速定位追踪请求日志信息                     | Required |
 | timestamp | number  |                         毫秒(13位)请求时间戳                          | Required |
 |   data    |   any   |           响应数据, 根据每个API响应 数据类型结构不同, 详见每个API的`响应参数`            | Optional |
@@ -121,7 +121,7 @@
 
 ### [用户](docs/api/user_api.md)
 
-### [候选人](docs/api/user_api.md)
+### [候选人](docs/api/candidate_api.md)
 
 ### 选举
 

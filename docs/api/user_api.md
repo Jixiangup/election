@@ -15,11 +15,17 @@ Content-Type: application/json
 
 #### 请求参数
 
+> 参数位置: body
+
 |  字段名   |   类型    |              描述              |    属性    |
 |:------:|:-------:|:----------------------------:|:--------:|
 | email  | string  |             登记邮件             | Required |
 | idCard | string  | 登记身份证, 符合香港身份证正则如：A123456(7) | Required |
 | admin  | boolean | 是否为管理员: true 管理员 false 普通用户  | Optional |
+
+#### 其他参数
+
+无
 
 #### 响应参数
 

@@ -28,3 +28,22 @@
 |  2  | null | 成功消息通知 |
 |  3  | null | 错误消息通知 |
 |  4  | null | 错误消息通知 |
+
+# 选举状态
+
+| 状态码 |    描述    |
+|:---:|:--------:|
+|  0  | 未开始(默认值) |
+|  1  |   已开始    |
+|  2  |   已结束    |
+
+# 分页对象
+
+|     字段名      |   类型   |    描述     |    属性    |
+|:------------:|:------:|:---------:|:--------:|
+|   current    | number |   当前页码    | Required |
+|  queryCount  | number |  每页查询总数   | Required |
+| currentCount | number | 当前查询到的记录数 | Required |
+|    total     | number |   总记录数    | Required |
+|     page     | number |    总页码    | Required |
+|   records    | [any]  | 发起查询的用户id | Optional |
