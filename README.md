@@ -82,16 +82,16 @@
 
 ## 全局响应参数
 
-|    字段名    |   类型    |                  描述                   |    属性    |
-|:---------:|:-------:|:-------------------------------------:|:--------:|
-|   code    | number  | 响应[状态码](docs/api/api_constant#异常CODE) | Required |
-|  message  | string  |                 用户邮箱                  | Required |
-|  success  | string  |                 用户身份证                 | Required |
-|   type    | boolean |                是否为管理员                 | Required |
-|  target   | boolean |                是否为管理员                 | Required |
-| requestId | boolean |                是否为管理员                 | Required |
-| timestamp | boolean |                是否为管理员                 | Required |
-|   date    | boolean |                是否为管理员                 | Required |
+|    字段名    |   类型    |                    描述                    |    属性    |
+|:---------:|:-------:|:----------------------------------------:|:--------:|
+|   code    | number  | 响应[状态码](docs/api/api_constant.md#异常CODE) | Required |
+|  message  | string  |                   用户邮箱                   | Required |
+|  success  | string  |                  用户身份证                   | Required |
+|   type    | boolean |                  是否为管理员                  | Required |
+|  target   | boolean |                  是否为管理员                  | Required |
+| requestId | boolean |                  是否为管理员                  | Required |
+| timestamp | boolean |                  是否为管理员                  | Required |
+|   date    | boolean |                  是否为管理员                  | Required |
 
 ## 名词解释
 
