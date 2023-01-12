@@ -123,5 +123,5 @@
 
 ### [候选人](docs/api/candidate_api.md)
 
-### 选举
+### [选举](docs/api/election_api.md)
 
