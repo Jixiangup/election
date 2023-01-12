@@ -49,28 +49,28 @@ public class R<T> {
     /**
      * 本次请求响应数据
      */
-    private T date;
+    private T data;
 
     private R() {
     }
 
-    private R(Integer code, String message, Boolean success, Integer type, String target, T date) {
+    private R(Integer code, String message, Boolean success, Integer type, String target, T data) {
         this.code = code;
         this.message = message;
         this.success = success;
         this.type = type;
         this.target = target;
-        this.date = date;
+        this.data = data;
     }
 
-    private R(Integer code, String message, Boolean success, Integer type, String target, String requestId, T date) {
+    private R(Integer code, String message, Boolean success, Integer type, String target, String requestId, T data) {
         this.code = code;
         this.message = message;
         this.success = success;
         this.type = type;
         this.target = target;
         this.requestId = requestId;
-        this.date = date;
+        this.data = data;
     }
 
 
@@ -127,7 +127,7 @@ public class R<T> {
         r.success = true;
         r.type = ENotificationType.NONE.getType();
         r.target = ENotificationType.NONE.getTarget();
-        r.date = data;
+        r.data = data;
         return r;
     }
 
@@ -137,7 +137,7 @@ public class R<T> {
         r.success = true;
         r.type = notification.getType();
         r.target = notification.getTarget();
-        r.date = data;
+        r.data = data;
         return r;
     }
 
@@ -206,12 +206,12 @@ public class R<T> {
         this.requestId = requestId;
     }
 
-    public T getDate() {
-        return date;
+    public T getData() {
+        return data;
     }
 
-    public void setDate(T date) {
-        this.date = date;
+    public void setData(T data) {
+        this.data = data;
     }
 
     public Long getTimestamp() {

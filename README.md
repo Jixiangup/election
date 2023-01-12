@@ -82,24 +82,46 @@
 
 ## 全局响应参数
 
-|    字段名    |   类型    |                    描述                    |    属性    |
-|:---------:|:-------:|:----------------------------------------:|:--------:|
-|   code    | number  | 响应[状态码](docs/api/api_constant.md#异常CODE) | Required |
-|  message  | string  |                   用户邮箱                   | Required |
-|  success  | string  |                  用户身份证                   | Required |
-|   type    | boolean |                  是否为管理员                  | Required |
-|  target   | boolean |                  是否为管理员                  | Required |
-| requestId | boolean |                  是否为管理员                  | Required |
-| timestamp | boolean |                  是否为管理员                  | Required |
-|   date    | boolean |                  是否为管理员                  | Required |
+|    字段名    |   类型    |                              描述                               |    属性    |
+|:---------:|:-------:|:-------------------------------------------------------------:|:--------:|
+|   code    | number  |           响应[状态码](docs/api/api_constant.md#异常CODE)            | Required |
+|  message  | string  |                             响应描述                              | Required |
+|  success  | boolean |                  本次是否成功, 前端校验用, 也可以使用code判断                   | Required |
+|   type    | number  |         请求完成之后的[通知类型](docs/api/api_constant.md#通知类型)          | Required |
+|  target   | string  | 请求完成之后的跳转值, 见[通知类型](docs/api/api_constant.md#通知类型)的`target`描述 | Required |
+| requestId | string  |                    本次请求id, 用于快速定位追踪请求日志信息                     | Required |
+| timestamp | number  |                         毫秒(13位)请求时间戳                          | Required |
+|   data    |   any   |           响应数据, 根据每个API响应 数据类型结构不同, 详见每个API的`响应参数`            | Optional |
+
+> 下文中所有`响应参数`就是上述的 `data` 参数类型
+
+### 响应示例
+
+```json
+{
+    "code": 0,
+    "message": "successful",
+    "success": true,
+    "type": 0,
+    "target": null,
+    "requestId": "610ba23d-9549-4be7-9890-c24cc806b8d6",
+    "timestamp": 1673520719096,
+    "date": {
+        "id": 12,
+        "email": "c.ehcb@qq.com",
+        "idCard": "C000000(0)",
+        "admin": false
+    }
+}
+```
 
 ## 名词解释
 
 - ${endpoint} 表示为你的服务器部署地址(如: `http:127.0.0.1:8080`)
 
-### [用户](docs/api/UserAPI.md)
+### [用户](docs/api/user_api.md)
 
-### 候选人
+### [候选人](docs/api/user_api.md)
 
 ### 选举
 

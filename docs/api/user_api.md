@@ -1,5 +1,5 @@
 <details>
-  <summary>登记用户</summary>
+  <summary><span style="font-size: 16px;font-weight: bold;">登记用户</span></summary>
 
 #### 请求方法
 
@@ -51,3 +51,5 @@ Content-Type: application/json
 }
 ```
 </details>
+
+---
