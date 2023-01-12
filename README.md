@@ -91,7 +91,7 @@
   
 #### 请求方法
 
-> POST `${endpoint}`
+> POST `${endpoint}/api/user/register`
 
 登记新用户到系统, 用户的 `邮箱` 和 `身份证`必须是未在系统注册过
 
