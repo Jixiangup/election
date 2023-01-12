@@ -20,17 +20,17 @@ public class RedisConstant {
         /**
          * 投票相关全局常量
          */
-        private static final String ELECTION_PREFIX = "election:";
+        private static final String ELECTION_PREFIX = GLOBAL_PREFIX + "election:";
 
         /**
          * 选举票数统计redis key
          */
-        public static final String NUMBER_OF_VOTES = GLOBAL_PREFIX + ELECTION_PREFIX + "votes:${electionId}:${candidateId}";
+        public static final String NUMBER_OF_VOTES = ELECTION_PREFIX + "votes:${electionId}:${candidateId}";
 
         /**
          * 投票key
          */
-        public static final String ELECTION_VOTE = GLOBAL_PREFIX + ELECTION_PREFIX + "${electionId}:${userid}";
+        public static final String ELECTION_VOTE = ELECTION_PREFIX + "${electionId}:${userid}";
     }
 
     /**

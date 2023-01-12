@@ -1,7 +1,9 @@
 package com.bnyte.election.api.service.impl;
 
+import com.bnyte.election.api.async.IAsyncMailTaskService;
 import com.bnyte.election.api.common.constant.RedisConstant;
 import com.bnyte.election.api.common.enums.EElectionStatus;
+import com.bnyte.election.api.common.lang.http.Page;
 import com.bnyte.election.api.common.lang.http.Status;
 import com.bnyte.election.api.common.util.StringUtils;
 import com.bnyte.election.api.dto.election.EditorElectionDTO;
@@ -12,11 +14,13 @@ import com.bnyte.election.api.entity.ElectionCandidateDetail;
 import com.bnyte.election.api.entity.User;
 import com.bnyte.election.api.exception.ParameterCheckException;
 import com.bnyte.election.api.mapper.ElectionMapper;
+import com.bnyte.election.api.param.election.VoteDetailSearch;
 import com.bnyte.election.api.service.IElectionCandidateDetailService;
 import com.bnyte.election.api.service.IElectionCandidateService;
 import com.bnyte.election.api.service.IElectionService;
 import com.bnyte.election.api.common.util.ObjectUtils;
 import com.bnyte.election.api.service.IUserService;
+import com.bnyte.election.api.vo.user.VoteInfo;
 import org.springframework.aop.framework.AopContext;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.EnableAspectJAutoProxy;
@@ -50,6 +54,9 @@ public class IElectionServiceImpl implements IElectionService {
     IUserService userService;
 
     @Autowired
+    IAsyncMailTaskService asyncMailTaskService;
+
+    @Autowired
     RedisTemplate<String, Long> redisString2LongTemplate;
 
     @Autowired
@@ -71,6 +78,8 @@ public class IElectionServiceImpl implements IElectionService {
         if (!election.getStatus().equals(EElectionStatus.UN_START.getCode())) {
             throw new ParameterCheckException(Status.CURRENT_STATE_IS_NOT_OPERATIONAL);
         }
+
+
 
         saveOrUpdateById(election);
 
@@ -188,9 +197,14 @@ public class IElectionServiceImpl implements IElectionService {
     }
 
     @Override
+    @Transactional
     public void finish(Long id) {
 
         finishPreCheck(id);
+
+        Election election = queryById(id);
+        election.setStatus(EElectionStatus.FINISHED.getCode());
+        updateById(election);
 
         Properties properties = new Properties();
         properties.setProperty("electionId", id.toString());
@@ -208,12 +222,60 @@ public class IElectionServiceImpl implements IElectionService {
             redisString2LongTemplate.delete(key);
         }
 
-        Election election = queryById(id);
-        election.setStatus(EElectionStatus.FINISHED.getCode());
-        updateById(election);
-
         // 发送邮件通知
+        // 这个位置应该吧完成的选举号发到 mq 去 让mq消费保证每条通知推广发出去 但是这里没那个条件就不这样写了
+        // 这种方式如果发消息失败那就会出现redis和db的事务问题 所以这里的更好解决方案是 丢 mq 管理 mark一下有时间可以优化一下
+        asyncMailTaskService.senderElectionNotice(id);
+    }
 
+    @Override
+    public Page<VoteInfo> pageVoteDetail(VoteDetailSearch search) {
+        // 校验是否符合查询条件 在本次选举投票过 或者是管理员
+        User user = userService.queryById(search.getUserid());
+        if (ObjectUtils.isNull(user)) {
+            ElectionCandidateDetail electionCandidateDetail = electionCandidateDetailService.queryVoteByUserid(search.getUserid(), search.getElectionId());
+            if (ObjectUtils.isNull(electionCandidateDetail)) {
+                throw new ParameterCheckException(Status.NEED_TO_VOTE_FIRST);
+            }
+        }
+        return electionCandidateDetailService.queryVoteDetailPage(search);
+    }
+
+    @Override
+    public Long candidateVoteCount(Long electionId, Long candidateId) {
+        Properties properties = new Properties();
+        properties.setProperty("electionId", electionId.toString());
+        properties.setProperty("candidateId", candidateId.toString());
+        Long count = redisString2LongTemplate.opsForValue().get(StringUtils.replacePlaceholders(RedisConstant.Election.NUMBER_OF_VOTES, properties));
+        if (null == count) {
+            ElectionCandidate electionCandidate = electionCandidateService.queryElectionByCandidateId(electionId, candidateId);
+            if (ObjectUtils.isNull(electionCandidate)) {
+                throw new ParameterCheckException(Status.DATA_NOT_FOUND);
+            }
+            return electionCandidate.getCount();
+        }
+        return count;
+    }
+
+    @Override
+    public List<ElectionCandidate> result(Long id) {
+        Election election = queryById(id);
+        if (ObjectUtils.isNull(election)) {
+            throw new ParameterCheckException(Status.DATA_NOT_FOUND);
+        }
+
+        List<ElectionCandidate> electionCandidates = electionCandidateService.listByElectionId(id);
+        Properties properties = new Properties();
+        properties.setProperty("electionId", id.toString());
+        for (ElectionCandidate electionCandidate : electionCandidates) {
+            properties.setProperty("candidateId", electionCandidate.getCandidateId().toString());
+            String key = StringUtils.replacePlaceholders(RedisConstant.Election.NUMBER_OF_VOTES, properties);
+            Long result = redisString2LongTemplate.opsForValue().get(key);
+            if (ObjectUtils.nonNull(result)) {
+                electionCandidate.setCount(result);
+            }
+        }
+        return electionCandidates;
     }
 
     private void finishPreCheck(Long id) {
@@ -229,7 +291,7 @@ public class IElectionServiceImpl implements IElectionService {
 
     /**
      * 前置校验
-     * @param dto
+     * @param dto 前端dtp参数
      */
     private void votePreCheck(VoteDTO dto) {
 

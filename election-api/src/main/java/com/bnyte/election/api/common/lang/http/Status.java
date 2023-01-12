@@ -40,6 +40,7 @@ public enum Status {
     DATA_NOT_FOUND(40004, "数据不存在"),
     DUPLICATE_VOTE(40005, "重复投票"),
     UNSUPPORTED_DISTRIBUTED_LOCK_TYPE(40006, "不支持的分布式锁类型"),
+    NEED_TO_VOTE_FIRST(40007, "需要先参与投票"),
 
     /**
      * 系统异常

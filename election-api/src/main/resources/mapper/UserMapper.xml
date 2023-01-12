@@ -17,6 +17,17 @@
         modified_time,
         deleted
     </sql>
+
+    <!-- 数据库所有字段 -->
+    <sql id="all_field_alias" >
+        item.id,
+        item.email,
+        item.id_card,
+        item.admin,
+        item.create_time,
+        item.modified_time,
+        item.deleted
+    </sql>
     <insert id="insert" keyProperty="id" useGeneratedKeys="true">
         insert into
         <include refid="table_name" />    ( <include refid="all_field" /> )

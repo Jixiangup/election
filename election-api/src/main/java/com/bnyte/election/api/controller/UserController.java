@@ -26,6 +26,11 @@ public class UserController {
     @Autowired
     IUserService userService;
 
+    /**
+     * 登记用户
+     * @param payload 登记用户前端请求参数
+     * @return 登记用户信息
+     */
     @PostMapping("/register")
     public R<RegisterVO> register(@RequestBody @Validated RegisterParam payload) {
         return R.OK(UserTransfer.INSTANCE.entity2VO(userService.register(UserTransfer.INSTANCE.param2DTO(payload))));

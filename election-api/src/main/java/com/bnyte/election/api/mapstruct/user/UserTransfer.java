@@ -4,8 +4,12 @@ import com.bnyte.election.api.dto.user.RegisterDTO;
 import com.bnyte.election.api.entity.User;
 import com.bnyte.election.api.param.user.RegisterParam;
 import com.bnyte.election.api.vo.user.RegisterVO;
+import com.bnyte.election.api.vo.user.VoteInfo;
 import org.mapstruct.Mapper;
+import org.mapstruct.Mapping;
 import org.mapstruct.factory.Mappers;
+
+import java.util.List;
 
 /**
  * <p>
@@ -23,4 +27,9 @@ public interface UserTransfer {
 
 
     RegisterVO entity2VO(User user);
+
+    List<VoteInfo> entityToVoteInfo(List<User> users);
+
+    @Mapping(source = "id", target = "userid")
+    VoteInfo entityToVoteInfo(User user);
 }

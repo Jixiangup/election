@@ -21,6 +21,7 @@
         <mysql-driver.version>8.0.30</mysql-driver.version>
         <mapstruct.version>1.5.2.Final</mapstruct.version>
         <mybatis-starter.version>3.0.1</mybatis-starter.version>
+        <pagehelper.version>1.4.6</pagehelper.version>
     </properties>
 
     <dependencyManagement>
@@ -78,6 +79,19 @@
             <dependency>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-starter-data-redis</artifactId>
+                <version>${spring-component.version}</version>
+            </dependency>
+
+
+            <dependency>
+                <groupId>com.github.pagehelper</groupId>
+                <artifactId>pagehelper-spring-boot-starter</artifactId>
+                <version>${pagehelper.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-starter-mail</artifactId>
                 <version>${spring-component.version}</version>
             </dependency>
 

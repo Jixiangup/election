@@ -51,7 +51,6 @@ public class DistributedLockAspectj {
         MethodSignature methodSignature = (MethodSignature) point.getSignature();
         Method method = methodSignature.getMethod();
         DistributedLock distributedLock = method.getAnnotation(DistributedLock.class);
-        // get properties
         Properties properties = getTemplateProperties(method.getParameters(), point.getArgs());
         String lockKey = StringUtils.replacePlaceholders(distributedLock.lockKey(), properties);
 

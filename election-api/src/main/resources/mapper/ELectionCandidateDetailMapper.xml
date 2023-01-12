@@ -24,4 +24,23 @@
     <select id="selectVoteByUserid" resultType="com.bnyte.election.api.entity.ElectionCandidateDetail">
         select <include refid="all_field" /> from <include refid="table_name" /> where userid = #{userid} and election_id = #{electionId}
     </select>
+    <select id="selectVoteDetailPage" resultType="com.bnyte.election.api.entity.User">
+        select <include refid="com.bnyte.election.api.mapper.UserMapper.all_field_alias" />
+        from <include refid="table_name" /> tecd
+        left join <include refid="com.bnyte.election.api.mapper.UserMapper.table_name" /> item on item.id = tecd.userid
+        where
+            tecd.election_id = #{search.electionId}
+          and tecd.candidate_id = #{search.candidateId}
+          <if test="search.key != null and search.key != ''">
+            and item.email like concat('%', #{search.key}, '%')
+          </if>
+          and item.deleted = false
+          and tecd.deleted = false
+    </select>
+    <select id="selectVoteByElectionId" resultType="com.bnyte.election.api.dao.ElectionDetailDAO">
+        select tu.id, tu.email, tecd.election_id, tecd.candidate_id
+        from <include refid="table_name" /> tecd
+        left join <include refid="com.bnyte.election.api.mapper.UserMapper.table_name" /> tu on tecd.userid = tu.id
+        where tecd.election_id = #{electionId}
+    </select>
 </mapper>

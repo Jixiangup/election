@@ -45,4 +45,13 @@ public class ElectionCandidate extends AbsAutoIdEntity {
     public void setCount(Long count) {
         this.count = count;
     }
+
+    @Override
+    public String toString() {
+        return "ElectionCandidate{" +
+                "candidateId=" + candidateId +
+                ", electionId=" + electionId +
+                ", count=" + count +
+                "} " + super.toString();
+    }
 }

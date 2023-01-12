@@ -16,6 +16,19 @@ spring:
           max-active: 8
           max-wait: -1ms
           min-idle: 10
+  mail:
+    host: ${MAIL_HOST:smtp.gmail.com}
+    username: ${MAIL_USERNAME:bnytezz@gamil.com}
+    password: ${MAIL_PASSWORD:maillpassword}
+    default-encoding: UTF-8
+    properties:
+      mail:
+        smtp:
+          ssl:
+            enable: true
+          starttls:
+            enable: true
+            required: true
 mybatis:
   configuration:
     map-underscore-to-camel-case: true
