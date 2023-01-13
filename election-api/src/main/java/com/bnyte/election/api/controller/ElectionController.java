@@ -81,9 +81,8 @@ public class ElectionController {
      */
     @PostMapping("/vote")
     @DistributedLock(lockKey = RedisConstant.Election.ELECTION_VOTE, lockType = EDistributedLockType.REDIS)
-    public R<Void> vote(@RequestBody @Validated @Property VoteParam payload) {
-        electionService.vote(ElectionTransfer.INSTANCE.payload2VoteDTO(payload));
-        return R.EMPTY();
+    public R<List<ElectionResultVO>> vote(@RequestBody @Validated @Property VoteParam payload) {
+        return R.OK(ElectionTransfer.INSTANCE.toResultVO(electionService.vote(ElectionTransfer.INSTANCE.payload2VoteDTO(payload))));
     }
 
     /**

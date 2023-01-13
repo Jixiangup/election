@@ -71,7 +71,7 @@ public interface IElectionService {
      * 给选举发起投票
      * @param dto 选举dto对象
      */
-    void vote(VoteDTO dto);
+    List<ElectionCandidate> vote(VoteDTO dto);
 
     /**
      * 结束选举

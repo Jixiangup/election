@@ -176,7 +176,7 @@ public class IElectionServiceImpl implements IElectionService {
     }
 
     @Override
-    public void vote(VoteDTO dto) {
+    public List<ElectionCandidate> vote(VoteDTO dto) {
         // 前置校验
         votePreCheck(dto);
 
@@ -194,6 +194,8 @@ public class IElectionServiceImpl implements IElectionService {
             electionCandidate.setCount(increment);
             electionCandidateService.updateById(electionCandidate);
         }
+
+        return result(dto.getElectionId());
     }
 
     @Override
