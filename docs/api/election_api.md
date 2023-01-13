@@ -193,7 +193,11 @@ Content-Type: application/json
 
 #### 响应参数
 
-无
+|     字段名     |   类型   |  描述   |    属性    |
+|:-----------:|:------:|:-----:|:--------:|
+| electionId  | number | 选举人ID | Required |
+| candidateId | number | 候选人ID | Required |
+|    count    | number |  获票数  | Required |
 
 #### 响应示例
 
@@ -206,7 +210,18 @@ Content-Type: application/json
   "target": null,
   "requestId": "554c16e8-f3d4-4bad-b4a1-59f325ebe152",
   "timestamp": 1673542746728,
-  "data": null
+  "data": [
+    {
+      "electionId": 1,
+      "candidateId": 1,
+      "count": 2
+    },
+    {
+      "electionId": 1,
+      "candidateId": 2,
+      "count": 1
+    }
+  ]
 }
 ```
 </details>
