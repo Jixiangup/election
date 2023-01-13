@@ -43,7 +43,7 @@
 
 - 初始化数据库
 
-  [执行Init脚本](https://github.com/bnyte/election/blob/main/sql/init.sql)
+  [执行Init脚本](https://github.com/bnyte/election/blob/main/election-api/src/main/resources/sql/init.sql)
 
 - 打包
   

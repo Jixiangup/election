@@ -1,10 +1,6 @@
 set names utf8mb4;
 set foreign_key_checks = 0;
 
-create database election;
-
-use election;
-
 drop table if exists t_user;
 create table t_user (
                         id bigint primary key auto_increment comment '自增主键',

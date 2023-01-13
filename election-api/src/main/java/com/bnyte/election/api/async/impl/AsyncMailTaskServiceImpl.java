@@ -7,6 +7,7 @@ import com.bnyte.election.api.dao.ElectionDetailDAO;
 import com.bnyte.election.api.entity.ElectionCandidate;
 import com.bnyte.election.api.service.IElectionCandidateDetailService;
 import com.bnyte.election.api.service.IElectionCandidateService;
+import jakarta.annotation.Resource;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mail.MailSender;
 import org.springframework.mail.SimpleMailMessage;
@@ -25,14 +26,19 @@ import java.util.StringJoiner;
 @Service
 public class AsyncMailTaskServiceImpl implements IAsyncMailTaskService {
 
-    @Autowired
-    IElectionCandidateService electionCandidateService;
+    final IElectionCandidateService electionCandidateService;
 
-    @Autowired
-    IElectionCandidateDetailService electionCandidateDetailService;
+    final IElectionCandidateDetailService electionCandidateDetailService;
 
-    @Autowired
-    MailSender mailSender;
+    final MailSender mailSender;
+
+    public AsyncMailTaskServiceImpl(IElectionCandidateService electionCandidateService,
+                                    IElectionCandidateDetailService electionCandidateDetailService,
+                                    @Autowired(required = false) MailSender mailSender) {
+        this.electionCandidateService = electionCandidateService;
+        this.electionCandidateDetailService = electionCandidateDetailService;
+        this.mailSender = mailSender;
+    }
 
     @Async
     @Override

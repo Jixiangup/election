@@ -22,6 +22,10 @@
         <mapstruct.version>1.5.2.Final</mapstruct.version>
         <mybatis-starter.version>3.0.1</mybatis-starter.version>
         <pagehelper.version>1.4.6</pagehelper.version>
+        <junit.version>5.9.1</junit.version>
+        <h2.version>2.1.214</h2.version>
+        <embedded-redis.version>0.6</embedded-redis.version>
+        <junit-platform-runner.version>1.9.2</junit-platform-runner.version>
     </properties>
 
     <dependencyManagement>
@@ -95,6 +99,39 @@
                 <version>${spring-component.version}</version>
             </dependency>
 
+            <dependency>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-starter-test</artifactId>
+                <version>${spring-component.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>org.junit.jupiter</groupId>
+                <artifactId>junit-jupiter-api</artifactId>
+                <version>${junit.version}</version>
+                <scope>test</scope>
+            </dependency>
+
+            <dependency>
+                <groupId>com.h2database</groupId>
+                <artifactId>h2</artifactId>
+                <version>${h2.version}</version>
+                <scope>test</scope>
+            </dependency>
+
+            <!-- https://mvnrepository.com/artifact/com.github.kstyrc/embedded-redis -->
+            <dependency>
+                <groupId>com.github.kstyrc</groupId>
+                <artifactId>embedded-redis</artifactId>
+                <version>${embedded-redis.version}</version>
+                <scope>test</scope>
+            </dependency>
+
+            <dependency>
+                <groupId>org.junit.platform</groupId>
+                <artifactId>junit-platform-runner</artifactId>
+                <version>${junit-platform-runner.version}</version>
+            </dependency>
         </dependencies>
     </dependencyManagement>
 

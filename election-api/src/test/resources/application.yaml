@@ -1,0 +1,21 @@
+
+spring:
+  h2:
+    console:
+      enabled: true
+  datasource:
+    driver-class-name: org.h2.Driver
+    url: jdbc:h2:./db;DB_CLOSE_DELAY=-1;MODE=MySQL
+  sql:
+    init:
+#      schema-locations: https://github.com/bnyte/election/blob/main/sql/init.sql
+      platform: h2
+      schema-locations: classpath*:sql/init.sql
+      mode: always
+server:
+  servlet:
+    context-path: /api
+mybatis:
+  configuration:
+    map-underscore-to-camel-case: true
+  mapper-locations: classpath:mapper/*.xml
